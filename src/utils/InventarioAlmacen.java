@@ -1,6 +1,6 @@
 package utils;
 
-public class Inventario {
+public class InventarioAlmacen {
 
     public static final int LIMITE_MESES_ANTIGUEDAD = 12;
     public static final double PORCENTAJE_DESCUENTO_ANTIGUEDAD = 0.15;
