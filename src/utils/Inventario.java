@@ -1,3 +1,5 @@
+package utils;
+
 public class Inventario {
     public double calcularTotalInventario(int numeroProductos, double precioUnitario,
                                           int mesesCatalogo, int diasDesdeUltimaVenta, int stockActual, String tipoCategoria) {
