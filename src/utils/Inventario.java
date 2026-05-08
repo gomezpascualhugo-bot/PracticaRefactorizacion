@@ -1,6 +1,16 @@
 package utils;
 
 public class Inventario {
+
+    public static final int LIMITE_MESES_ANTIGUEDAD = 12;
+    public static final double PORCENTAJE_DESCUENTO_ANTIGUEDAD = 0.15;
+    public static final int LIMITES_DIAS_ROTACION = 60;
+    public static final double PORCENTAJE_PENALIZACION_ROTACION = 0.10;
+    public static final int LIMITE_STOCK_ALTO = 100;
+    public static final double PORCENTAJE_BONIFICACION_STOCK = 0.05;
+    public static final double PORCENTAJE_AJUSTE_PREMIUM = 0.20;
+    public static final double PORCENTAJE_AJUSTE_BASICA = 0.05;
+
     public double calcularTotalInventario(int numeroProductos, double precioUnitario,
                                           int mesesCatalogo, int diasDesdeUltimaVenta, int stockActual, String tipoCategoria) {
 // Cálculo del valor base del inventario
@@ -20,39 +30,40 @@ public class Inventario {
     private static double calcularAjusteCategoria(String tipoCategoria, double valorBase) {
         double ajusteCategoria = 0;
         if (tipoCategoria.equals("premium")) {
-            ajusteCategoria = valorBase * 0.20;
+            ajusteCategoria = valorBase * PORCENTAJE_AJUSTE_PREMIUM;
         } else if (tipoCategoria.equals("basica")) {
-            ajusteCategoria = -valorBase * 0.05;
+            ajusteCategoria = -valorBase * PORCENTAJE_AJUSTE_BASICA;
         }
         return ajusteCategoria;
     }
 
     private static double calcularBonificacionStock(int stockActual, double valorBase) {
         double bonificacionStock = 0;
-        if (stockActual > 100) {
-            bonificacionStock = valorBase * 0.05;
+        if (stockActual > LIMITE_STOCK_ALTO) {
+            bonificacionStock = valorBase * PORCENTAJE_BONIFICACION_STOCK;
         }
         return bonificacionStock;
     }
 
     private static double calcularPenalizacionRotacion(int diasDesdeUltimaVenta, double valorBase) {
         double penalizacionRotacion = 0;
-        if (diasDesdeUltimaVenta > 60) {
-            penalizacionRotacion = valorBase * 0.10;
+        if (diasDesdeUltimaVenta > LIMITES_DIAS_ROTACION) {
+            penalizacionRotacion = valorBase * PORCENTAJE_PENALIZACION_ROTACION;
         }
         return penalizacionRotacion;
     }
 
     private static double calcularDescuentoAntiguedad(int mesesCatalogo, double valorBase) {
         double descuentoAntiguedad = 0;
-        if (mesesCatalogo > 12) {
-            descuentoAntiguedad = valorBase * 0.15;
+        if (mesesCatalogo > LIMITE_MESES_ANTIGUEDAD) {
+            descuentoAntiguedad = valorBase * PORCENTAJE_DESCUENTO_ANTIGUEDAD;
         }
         return descuentoAntiguedad;
     }
 }
 
-/*nP → numeroProductos
+/*
+nP → numeroProductos
  pU → precioUnitario
  mC → mesesCatalogo
  dV → diasDesdeUltimaVenta
@@ -68,4 +79,13 @@ calcularDescuentoAntiguedad
  calcularPenalizacionRotacion
  calcularBonificacionStock
  calcularAjusteCategoria
+
+ LIMITE_MESES_ANTIGUEDAD = 12
+ PORCENTAJE_DESCUENTO_ANTIGUEDAD = 0.15
+ LIMITE_DIAS_ROTACION = 60
+ PORCENTAJE_PENALIZACION_ROTACION = 0.10
+ LIMITE_STOCK_ALTO = 100
+ PORCENTAJE_BONIFICACION_STOCK = 0.05
+ PORCENTAJE_AJUSTE_PREMIUM = 0.20
+ PORCENTAJE_AJUSTE_BASICA = -0.05
 */
