@@ -9,7 +9,7 @@ public class InventarioAlmacen {
     public static final int LIMITE_STOCK_ALTO = 100;
     public static final double PORCENTAJE_BONIFICACION_STOCK = 0.05;
     public static final double PORCENTAJE_AJUSTE_PREMIUM = 0.20;
-    public static final double PORCENTAJE_AJUSTE_BASICA = 0.05;
+    public static final double PORCENTAJE_AJUSTE_BASICA = -0.05;
 
     public double calcularTotalInventario(int numeroProductos, double precioUnitario,
                                           int mesesCatalogo, int diasDesdeUltimaVenta, int stockActual, String tipoCategoria) {
@@ -32,7 +32,7 @@ public class InventarioAlmacen {
         if (tipoCategoria.equals("premium")) {
             ajusteCategoria = valorBase * PORCENTAJE_AJUSTE_PREMIUM;//0.20
         } else if (tipoCategoria.equals("basica")) {
-            ajusteCategoria = valorBase * PORCENTAJE_AJUSTE_BASICA;//0.05
+            ajusteCategoria = valorBase * PORCENTAJE_AJUSTE_BASICA;//-0.05
         }
         return ajusteCategoria;
     }
